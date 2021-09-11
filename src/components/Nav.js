@@ -1,35 +1,72 @@
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
-import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react"
+import {
+  Button,
+  ButtonGroup,
+  HStack,
+  Tag,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react"
 import { useWeb3 } from "web3-hooks"
 
-const Nav = () => {
+const Nav = ({ choice, setChoice }) => {
   const [web3State, login] = useWeb3()
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <HStack p={4} justifyContent={"space-between"} alignItems={"center"}>
-      <Box>LOGO</Box>
-      <Box>NAV POOL STATS</Box>
+    <HStack
+      p={4}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      bg={useColorModeValue("pink.50", "gray.900")}
+    >
+      <ButtonGroup spacing={4}>
+        <Button
+          size={"sm"}
+          aria-label="pool"
+          value="pool"
+          onClick={(e) => setChoice(e.target.value)}
+          disabled={choice === "pool"}
+        >
+          Pool
+        </Button>
+        <Button
+          size={"sm"}
+          aria-label="stats"
+          value="stats"
+          onClick={(e) => setChoice(e.target.value)}
+          disabled={choice === "stats"}
+        >
+          Stats
+        </Button>
+      </ButtonGroup>
 
       {web3State.isLogged ? (
         <HStack spacing={4}>
           {web3State.chainId === 4 ? (
-            <Text>Rinkeby</Text>
+            <Tag size={"lg"} colorScheme="yellow">
+              Rinkeby
+            </Tag>
           ) : (
-            <Text>Please connect Rinkeby network</Text>
+            <Tag size={"lg"} colorScheme="red">
+              Please connect Rinkeby network
+            </Tag>
           )}
-          <Text>{web3State.balance}</Text>
-          <Text>{web3State.account}</Text>
-          <Button aria-label="mode" onClick={toggleColorMode}>
+          <Tag size={"lg"}>{Math.round(web3State.balance * 100) / 100} ETH</Tag>
+          <Tag size={"lg"}>
+            {web3State.account.split("").slice(0, 6)}...
+            {web3State.account.split("").slice(-4)}
+          </Tag>
+          <Button size={"sm"} aria-label="mode" onClick={toggleColorMode}>
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </Button>
         </HStack>
       ) : (
         <HStack spacing={4}>
-          <Button aria-label="login" onClick={login}>
+          <Button size={"sm"} aria-label="login" onClick={login}>
             Connect to MetaMask
           </Button>
-          <Button aria-label="mode" onClick={toggleColorMode}>
+          <Button size={"sm"} aria-label="mode" onClick={toggleColorMode}>
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </Button>
         </HStack>

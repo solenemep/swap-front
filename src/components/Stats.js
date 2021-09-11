@@ -1,4 +1,4 @@
 const Stats = () => {
-  return
+  return <></>
 }
 export default Stats

@@ -1,4 +1,4 @@
 const Pool = () => {
-  return
+  return <></>
 }
 export default Pool
