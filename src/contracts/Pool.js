@@ -302,14 +302,9 @@ export const poolABI = [
   {
     inputs: [
       {
-        internalType: "contract IERC20",
-        name: "tokenIn",
-        type: "address",
-      },
-      {
-        internalType: "contract IERC20",
-        name: "tokenOut",
-        type: "address",
+        internalType: "enum Pool.Token",
+        name: "token",
+        type: "uint8",
       },
       {
         internalType: "uint256",

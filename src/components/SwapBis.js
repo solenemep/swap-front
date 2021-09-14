@@ -50,17 +50,9 @@ const SwapBis = ({ token1, token2 }) => {
       try {
         let amountOut = 0
         if (tokenIn === token1) {
-          amountOut = await poolContract.getAmountOut(
-            token1Contract,
-            token2Contract,
-            amountIn
-          )
+          amountOut = await poolContract.getAmountOut(0, amountIn)
         } else if (tokenIn === token2) {
-          amountOut = await poolContract.getAmountOut(
-            token2Contract,
-            token1Contract,
-            amountIn
-          )
+          amountOut = await poolContract.getAmountOut(1, amountIn)
         }
         setAmountOut(amountOut.toString())
       } catch (e) {
