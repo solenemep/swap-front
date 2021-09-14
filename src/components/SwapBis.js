@@ -21,7 +21,7 @@ const SwapBis = ({ token1, token2 }) => {
   let tokenOut = tokenIn === token1 ? token2 : token1
 
   const [tokenInSymbol, setTokenInSymbol] = useState("")
-  const [tokenOutSymbol, setTokenOutSymbol] = useState("")
+  // const [tokenOutSymbol, setTokenOutSymbol] = useState("")
 
   const [amountIn, setAmountIn] = useState(0)
   // const [amountOut, setAmountOut] = useState(0)
@@ -30,16 +30,16 @@ const SwapBis = ({ token1, token2 }) => {
     const getSymbols = async () => {
       try {
         let symbolIn = ""
-        let symbolOut = ""
+        //let symbolOut = ""
         if (tokenIn === token1) {
           symbolIn = await token1Contract.symbol()
-          symbolOut = await token2Contract.symbol()
+          //symbolOut = await token2Contract.symbol()
         } else if (tokenIn === token2) {
           symbolIn = await token2Contract.symbol()
-          symbolOut = await token1Contract.symbol()
+          //symbolOut = await token1Contract.symbol()
         }
         setTokenInSymbol(symbolIn)
-        setTokenOutSymbol(symbolOut)
+        //setTokenOutSymbol(symbolOut)
       } catch (e) {
         console.log(e)
       }
