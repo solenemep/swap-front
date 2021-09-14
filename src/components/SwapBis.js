@@ -22,7 +22,7 @@ const SwapBis = ({ token1, token2 }) => {
   const [tokenOutSymbol, setTokenOutSymbol] = useState("")
 
   const [amountIn, setAmountIn] = useState(0)
-  const [amountOut, setAmountOut] = useState(0)
+  // const [amountOut, setAmountOut] = useState(0)
 
   useEffect(() => {
     const getSymbols = async () => {
@@ -44,7 +44,7 @@ const SwapBis = ({ token1, token2 }) => {
     }
     getSymbols()
   }, [tokenIn, tokenOut, token1, token1Contract, token2, token2Contract])
-
+  /*
   useEffect(() => {
     const getAmountOut = async () => {
       try {
@@ -70,7 +70,7 @@ const SwapBis = ({ token1, token2 }) => {
     token2,
     token2Contract,
   ])
-
+*/
   // SWAP
   const [isLoadingSwap, setIsLoadingSwap] = useState(false)
   const handleSwap = async () => {
@@ -115,6 +115,7 @@ const SwapBis = ({ token1, token2 }) => {
         <InputLeftAddon children="token out" />
         <Input placeholder="token out" value={tokenOut} disabled />
       </InputGroup>
+      {/* 
       <InputGroup>
         <InputLeftAddon children="amount out" />
         <Input
@@ -124,6 +125,7 @@ const SwapBis = ({ token1, token2 }) => {
         />
         <InputRightAddon children={tokenOutSymbol} />
       </InputGroup>
+      */}
       <Button isFullWidth onClick={handleSwap} isLoading={isLoadingSwap}>
         Swap
       </Button>
