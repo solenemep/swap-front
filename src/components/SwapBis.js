@@ -78,9 +78,9 @@ const SwapBis = ({ token1, token2 }) => {
       setIsLoadingSwap(true)
       const amountInBN = ethers.utils.parseEther(amountIn)
       let tx
-      if (token === token1) {
+      if (tokenIn === token1) {
         tx = await poolContract.swap(0, amountInBN)
-      } else if (token === token2) {
+      } else if (tokenIn === token2) {
         tx = await poolContract.swap(1, amountInBN)
       }
       await tx.wait()
