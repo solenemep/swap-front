@@ -9,10 +9,10 @@ export const TokensContextProvider = ({
   token2Address,
   children,
 }) => {
-  const token1 = useContract(token1Address, tokensABI)
-  const token2 = useContract(token2Address, tokensABI)
+  const token1Contract = useContract(token1Address, tokensABI)
+  const token2Contract = useContract(token2Address, tokensABI)
   return (
-    <TokensContext.Provider value={{ token1, token2 }}>
+    <TokensContext.Provider value={{ token1Contract, token2Contract }}>
       {children}
     </TokensContext.Provider>
   )

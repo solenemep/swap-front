@@ -5,9 +5,9 @@ import { poolFactoryAddress, poolFactoryABI } from "../contracts/PoolFactory"
 export const PoolFactoryContext = createContext()
 
 export const PoolFactoryContextProvider = ({ children }) => {
-  const poolFactory = useContract(poolFactoryAddress, poolFactoryABI)
+  const poolFactoryContract = useContract(poolFactoryAddress, poolFactoryABI)
   return (
-    <PoolFactoryContext.Provider value={{ poolFactory }}>
+    <PoolFactoryContext.Provider value={{ poolFactoryContract }}>
       {children}
     </PoolFactoryContext.Provider>
   )

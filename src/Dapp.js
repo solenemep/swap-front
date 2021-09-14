@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react"
-import { Fragment, useState } from "react"
-import Donate from "./components/Donate"
+import { useState } from "react"
 import Footer from "./components/Footer"
 import Nav from "./components/Nav"
 import Pool from "./components/Pool"
-import Stats from "./components/Stats"
+import Swap from "./components/Swap"
+import Liquidity from "./components/Liquidity"
+import { Fragment } from "react"
 
 const Dapp = () => {
   const [choice, setChoice] = useState("pool")
@@ -13,9 +14,9 @@ const Dapp = () => {
       <Nav choice={choice} setChoice={setChoice} />
       <Box minH={"100vh"}>
         {choice === "pool" && <Pool />}
-        {choice === "stats" && <Stats />}
+        {choice === "liquidity" && <Liquidity />}
+        {choice === "swap" && <Swap />}
       </Box>
-      <Donate />
       <Footer />
     </Fragment>
   )

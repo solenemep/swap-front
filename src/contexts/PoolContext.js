@@ -5,8 +5,8 @@ import { poolABI } from "../contracts/Pool"
 export const PoolContext = createContext()
 
 export const PoolContextProvider = ({ poolAddress, children }) => {
-  const pool = useContract(poolAddress, poolABI)
+  const poolContract = useContract(poolAddress, poolABI)
   return (
-    <PoolContext.Provider value={{ pool }}>{children}</PoolContext.Provider>
+    <PoolContext.Provider value={{ poolContract }}>{children}</PoolContext.Provider>
   )
 }

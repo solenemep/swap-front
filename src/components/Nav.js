@@ -15,6 +15,7 @@ const Nav = ({ choice, setChoice }) => {
 
   return (
     <HStack
+      height={16}
       p={4}
       justifyContent={"space-between"}
       alignItems={"center"}
@@ -32,12 +33,21 @@ const Nav = ({ choice, setChoice }) => {
         </Button>
         <Button
           size={"sm"}
-          aria-label="stats"
-          value="stats"
+          aria-label="liquidity"
+          value="liquidity"
           onClick={(e) => setChoice(e.target.value)}
-          disabled={choice === "stats"}
+          disabled={choice === "liquidity"}
         >
-          Stats
+          Liquidity
+        </Button>
+        <Button
+          size={"sm"}
+          aria-label="swap"
+          value="swap"
+          onClick={(e) => setChoice(e.target.value)}
+          disabled={choice === "swap"}
+        >
+          Swap
         </Button>
       </ButtonGroup>
 
@@ -53,7 +63,7 @@ const Nav = ({ choice, setChoice }) => {
             </Tag>
           )}
           <Tag size={"lg"}>{Math.round(web3State.balance * 100) / 100} ETH</Tag>
-          <Tag size={"lg"}>
+          <Tag size={"lg"} display={{ base: "none", md: "flex" }}>
             {web3State.account.split("").slice(0, 6)}...
             {web3State.account.split("").slice(-4)}
           </Tag>
