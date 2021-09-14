@@ -85,7 +85,12 @@ const SwapBis = ({ token1, token2 }) => {
     try {
       setIsLoadingSwap(true)
       const amountInBN = ethers.utils.parseEther(amountIn)
-      const tx = await poolContract.swap(tokenIn, amountInBN)
+      let tx
+      if (token === token1) {
+        tx = await poolContract.swap(0, amountInBN)
+      } else if (token === token2) {
+        tx = await poolContract.swap(1, amountInBN)
+      }
       await tx.wait()
       console.log("TX MINED")
     } catch (e) {
