@@ -1,4 +1,4 @@
-import { Heading, VStack } from "@chakra-ui/react"
+import { Alert, AlertIcon, Heading, VStack } from "@chakra-ui/react"
 import { useState } from "react"
 import { PoolContextProvider } from "../contexts/PoolContext"
 import { TokensContextProvider } from "../contexts/TokensContext"
@@ -42,6 +42,12 @@ const Liquidity = () => {
             />
           </TokensContextProvider>
         </PoolContextProvider>
+      )}
+      {poolAddress === "0x00" && (
+        <Alert status="warning">
+          <AlertIcon />
+          No existant pool with this parameters
+        </Alert>
       )}
     </VStack>
   )
