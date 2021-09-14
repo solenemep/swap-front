@@ -6,6 +6,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Select,
+  useToast,
 } from "@chakra-ui/react"
 import { Fragment, useEffect, useState } from "react"
 import { useTokensContext } from "../hooks/useTokens"
@@ -13,6 +14,7 @@ import { usePoolContext } from "../hooks/usePool"
 import { ethers } from "ethers"
 
 const LiquidityBis = ({ poolAddress, token1, token2 }) => {
+  const toast = useToast()
   const { poolContract } = usePoolContext()
   const { token1Contract, token2Contract } = useTokensContext()
   const [token, setToken] = useState()
@@ -75,9 +77,33 @@ const LiquidityBis = ({ poolAddress, token1, token2 }) => {
         tx = await poolContract.depositLiquidity(1, amountTKNBN)
       }
       await tx.wait()
-      console.log("TX MINED")
+      toast({
+        title: "Added liquidity successfully",
+        variant: "subtle",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      })
     } catch (e) {
-      console.log(e)
+      if (e.code === 4001) {
+        toast({
+          title: "Transaction signature denied",
+          description: e.message,
+          variant: "subtle",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: e.message,
+          variant: "subtle",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      }
     } finally {
       setIsLoadingAdd(false)
     }
@@ -96,9 +122,33 @@ const LiquidityBis = ({ poolAddress, token1, token2 }) => {
         tx = await poolContract.removeLiquidity(1, amountLPBN)
       }
       await tx.wait()
-      console.log("TX MINED")
+      toast({
+        title: "Removed liquidity successfully",
+        variant: "subtle",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      })
     } catch (e) {
-      console.log(e)
+      if (e.code === 4001) {
+        toast({
+          title: "Transaction signature denied",
+          description: e.message,
+          variant: "subtle",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: e.message,
+          variant: "subtle",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      }
     } finally {
       setIsLoadingRemove(false)
     }

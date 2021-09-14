@@ -6,6 +6,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Select,
+  useToast,
   VStack,
 } from "@chakra-ui/react"
 import { ethers } from "ethers"
@@ -14,6 +15,7 @@ import { erc20List } from "../erc20"
 import { usePoolFactoryContext } from "../hooks/usePoolFactory"
 
 const Pool = () => {
+  const toast = useToast()
   const { poolFactoryContract } = usePoolFactoryContext()
 
   // CREATE POOL
@@ -27,9 +29,33 @@ const Pool = () => {
       const feesBN = ethers.BigNumber.from(fees.toString())
       const tx = await poolFactoryContract.create(token1, token2, feesBN)
       await tx.wait()
-      console.log("TX MINED")
+      toast({
+        title: "Pool created successfully",
+        variant: "subtle",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      })
     } catch (e) {
-      console.log(e)
+      if (e.code === 4001) {
+        toast({
+          title: "Transaction signature denied",
+          description: e.message,
+          variant: "subtle",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: e.message,
+          variant: "subtle",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      }
     } finally {
       setIsLoadingCreate(false)
     }
